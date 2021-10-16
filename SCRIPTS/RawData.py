@@ -22,17 +22,18 @@ class RawData:
                     attribute[label].append(float(line[header.index(label)].replace(',', '.')))
             for label in xQualLabels:
                 self.xQuali[label].append(line[header.index(label)])
-        self.possibleValues = dict()
+        self.possibleQualities = dict()
         self.digitalize()
 
     def digitalize(self):
-        self.enumeratePossibleValues()
+        # converts labels (string) to numbers (int)
+        self.enumeratePossibleQualities()
         for label in self.xQuali.keys():
-            self.xQuali[label] = [self.possibleValues[label].index(value) for value in self.xQuali[label]]
+            self.xQuali[label] = [self.possibleQualities[label].index(value) for value in self.xQuali[label]]
 
-    def enumeratePossibleValues(self):
+    def enumeratePossibleQualities(self):
         for label, column in self.xQuali.items():
-            self.possibleValues[label] = []
+            self.possibleQualities[label] = []
             for value in column:
-                if value not in self.possibleValues[label]:
-                    self.possibleValues[label].append(value)
+                if value not in self.possibleQualities[label]:
+                    self.possibleQualities[label].append(value)

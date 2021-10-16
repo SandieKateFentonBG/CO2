@@ -1,0 +1,17 @@
+
+
+ #TODO : 1 - in Data
+ - where should i split train and test?
+ # do we feed the entire x, y df to the model, and the model splits it, or do we feed only the training to the model?
+ #TODO : 2 - in Data
+ - Add scale as a parameter in Raw Data?
+ - Should I scale my Y?
+ comment savaoir ce qui est dans la classe et ce qui ne l'est pas?
+  #TODO : 3 - in Data
+  - specify the y you are working with - absolute or ratio/when /where/how
+  # todo : how do I know what order my matrix is following - ql then qt ?
+
+  Polynomial
+  #elevate to logarithm/inverse proportionalty/other relations
+  #mix features x1x2 etc
+  #the polynomial for CO2e willl not be calibrated in the same way as the one for CO2e/m2..?
