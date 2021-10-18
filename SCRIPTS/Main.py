@@ -1,20 +1,20 @@
 from RawData import RawData
 from Data import Data
 from ModelAssessment import rotation
+from Dashboard import *
 
-
-csvPath = "C:/Users/sfenton/Code/Repositories/CO2/DATA/210413_PM_CO2_data"
-outputPath = 'C:/Users/sfenton/Code/Repositories/CO2/RESULTS/'
-
-xQualLabels = ['Sector', 'Type', 'Basement', 'Foundations', 'Ground Floor', 'Superstructure', 'Cladding', 'BREEAM Rating']
-xQuantLabels = ['GIFA (m2)', 'Storeys', 'Typical Span (m)', 'Typ Qk (kN_per_m2)']
-yLabels = ['Calculated Total tCO2e', 'Calculated tCO2e_per_m2']
-
-powers = {'GIFA (m2)': [1, 2, 3], 'Storeys': [1, 2], 'Typical Span (m)': [1, 2], 'Typ Qk (kN_per_m2)': [1, 2, 3]}
 
 dat = Data(RawData(csvPath, ';', 5, xQualLabels, xQuantLabels, yLabels))
-xSets, ySetsMultiVar = dat.asDataframes(powers, False)
+xSets, ySetsMultiVar = dat.asDataframes(scaling, powers)
+
 for i in range(len(yLabels)):
     print("------> " + yLabels[i])
     ySets = [batch[:, i] for batch in ySetsMultiVar]
-    print(rotation(xSets, ySets))
+    score, theta, scores = rotation(xSets, ySets, modelingParams)
+    print("Mean quality (%s) :" % modelingParams['method'], score)
+    print("Batchs quality (%s) :" % modelingParams['method'], scores)
+    print("First Theta : ")
+    for t in theta:
+        print(t)
+    print()
+

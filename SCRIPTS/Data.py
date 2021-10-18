@@ -30,13 +30,13 @@ class Data:
         self.x.update(logitize(rawData.xQuali, rawData.possibleQualities))
         self.y = rawData.y
 
-    def asDataframes(self, powers=None, scale=False, batchCount=5):
-        x, y = self.asDataframe(powers, scale)
+    def asDataframes(self, scale, powers=None, batchCount=5):
+        x, y = self.asDataframe(scale, powers)
         cutoffIndex = batchCount if x.shape[0] % batchCount == 0\
             else [int(x.shape[0] / batchCount * i) for i in range(1, batchCount)]
         return np.split(x, cutoffIndex), np.split(y, cutoffIndex)
 
-    def asDataframe(self, powers={}, scale=False):
+    def asDataframe(self, scale, powers={}):
         numValues = len(next(iter(self.x.values())))
         x = np.zeros((numValues, len(self.x)-len(powers)))
         y = np.zeros((numValues, len(self.y)))

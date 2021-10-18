@@ -13,12 +13,12 @@ class LinReg:
         self.theta = np.matmul(pinv, y)
 
     def prediction(self, x):
-        if not self.theta:
+        if self.theta is None:
             print("Model has no theta")
             return
         return np.matmul(x, self.theta)
 
-    def evaluation(self, x, y, method='mse', tolerance=0.05):
+    def evaluation(self, x, y, method, tolerance=0.05):
         pred = self.prediction(x)
         if method == 'mse':
             # Calculate the mean square error between the prediction and reference vectors
