@@ -12,7 +12,9 @@ dat = Data(rd, scaling)
 
 #print(dat.asDataframe(mixVariables=mixVariables)[0].shape, dat.asDataframe(mixVariables=mixVariables)[0])
 # print(dat.asDataframe(powers, mixVariables)[0].shape, dat.asDataframe(powers, mixVariables)[0])
-xSets, ySetsMultiVar = dat.asDataframes(powers, mixVariables)
+x, y, xlabels = dat.asDataframe(powers, mixVariables)
+print("here", xlabels)
+#xSets, ySetsMultiVar = dat.asDataframes(powers, mixVariables)
 
 
 def checkyLabels(yLabels, xSets, modelingParams, ySetsMultiVar):
@@ -23,8 +25,16 @@ def checkyLabels(yLabels, xSets, modelingParams, ySetsMultiVar):
         print("Mean quality (%s) :" % modelingParams['method'], score)
         print("Batchs quality (%s) :" % modelingParams['method'], scores)
         print("First Theta (%s) :" % len(theta[0]))
-        for t in theta:
-            print(t)
+        print(len(theta[0]), type(theta[0]), theta[0])
+        # for t in theta:
+        #     print(t)
         print()
 
-checkyLabels(yLabels, xSets, modelingParams, ySetsMultiVar)
+        print("theta - mean", np.array([np.mean(theta, axis =0)]))
+        print("theta - std ", np.array([np.std(theta, axis=0)]))
+
+
+
+
+
+# checkyLabels(yLabels, xSets, modelingParams, ySetsMultiVar)

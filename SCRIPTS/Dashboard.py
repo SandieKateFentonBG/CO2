@@ -5,8 +5,8 @@ outputPath = 'C:/Users/sfenton/Code/Repositories/CO2/RESULTS/'
 
 # DATA
 
-xQualLabels = [ 'Sector','Basement'] #'Type', ,'Foundations','Ground Floor','Superstructure','Cladding', 'BREEAM Rating']
-xQuantLabels = ['GIFA (m2)','Storeys' , 'Typical Span (m)', 'Typ Qk (kN_per_m2)'] #]
+xQualLabels = ['Sector','Type'] #,'Basement' ,'Foundations','Ground Floor','Superstructure','Cladding', 'BREEAM Rating']
+xQuantLabels = ['GIFA (m2)','Storeys'] # , 'Typical Span (m)', 'Typ Qk (kN_per_m2)']
 
 allvalues = ['Sector_Other', 'Sector_Residential', 'Sector_Cultural', 'Sector_Educational', 'Sector_Mixed Use', 'Sector_Commercial',
  'Sector_Industrial', 'Type_New Build (Brownfield)', 'Type_New Build (Greenfield)', 'Type_Mixed New Build/Refurb',
@@ -27,8 +27,8 @@ scaling = False #True
 
 # MODEL
 
-powers = {} #'GIFA (m2)': [1, 2, 3],'Storeys': [1, 2, 3],'Typical Span (m)': [1, 2, 3],'Typ Qk (kN_per_m2)': [1, 2, 3] }
+powers = {'GIFA (m2)': [1, 2, 3]} #,'Storeys': [1, 2, 3],'Typical Span (m)': [1, 2, 3],'Typ Qk (kN_per_m2)': [1, 2, 3] }
 
 modelingParams = {"regularisation": 1, "tolerance": 0.1, "method": "accuracy"} #'mse'; "mae"
 
-mixVariables = [['GIFA (m2)','Storeys'], ['Sector_Residential','Basement_Partial Footprint']] #, 'Typ Qk (kN_per_m2)'],,['Sector','Type','Basement','Foundations','Ground Floor','Superstructure','Cladding', 'BREEAM Rating' ]], ['Typical Span (m)'],['GIFA (m2)','Storeys','Typical Span (m)', 'Typ Qk (kN_per_m2)']
+mixVariables = [['GIFA (m2)','Storeys']] #, 'Typ Qk (kN_per_m2)'],,['Sector','Type','Basement','Foundations','Ground Floor','Superstructure','Cladding', 'BREEAM Rating' ]], ['Typical Span (m)'],['GIFA (m2)','Storeys','Typical Span (m)', 'Typ Qk (kN_per_m2)'], ['Sector_Residential','Basement_Partial Footprint']

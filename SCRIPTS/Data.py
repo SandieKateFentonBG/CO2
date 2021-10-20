@@ -40,7 +40,7 @@ class Data:
         self.y = rawData.y
 
     def asDataframes(self, powers=None, mixVariables=None, batchCount=5):
-        x, y = self.asDataframe(powers, mixVariables)
+        x, y, _ = self.asDataframe(powers, mixVariables)
         cutoffIndex = batchCount if x.shape[0] % batchCount == 0\
             else [int(x.shape[0] / batchCount * i) for i in range(1, batchCount)]
         return np.split(x, cutoffIndex), np.split(y, cutoffIndex)
@@ -49,38 +49,45 @@ class Data:
         numValues = len(next(iter(self.x.values())))
         x = np.zeros((numValues, len(self.x)-len(powers)))
         y = np.zeros((numValues, len(self.y)))
+        xlabels = [f for f in self.x.keys() if f not in powers.keys()]
         for i in range(numValues):  # 80
             x[i, :] = np.array([self.x[f][i] for f in self.x.keys() if f not in powers.keys()])
             y[i, :] = np.array([self.y[f][i] for f in self.y.keys()])
         if powers:
-            x = np.hstack((x, self.powerUpDataframe(powers, numValues)))
+            xPowers, xPowerLabels = self.powerUpDataframe(powers, numValues)
+            x = np.hstack((x, xPowers))
+            xlabels += xPowerLabels
         if mixVariables:
-            x = np.hstack((x, self.crossVariablesDataframe(mixVariables, numValues)))
-        return x, y
+            xCross, xCrossLabels = self.crossVariablesDataframe(mixVariables, numValues)
+            x = np.hstack((x,xCross))
+            xlabels += xCrossLabels
+        return x, y, xlabels
+
 
     def powerUpDataframe(self, powers, numValues):
         xPowers = np.zeros((numValues, countPowers(powers)))
         colIndex = 0
+        xPowerLabels = []
         for label, powerList in powers.items():
             for power in powerList:
                 xPowers[:, colIndex] = np.power(self.x[label], power)
+                xPowerLabels.append(label + '_exp' + str(power))
                 colIndex += 1
-        return xPowers
+        return xPowers, xPowerLabels
 
     def crossVariablesDataframe(self,mixVariables, numValues):
+        #todo : this doesn't work if the keys aren't in the linear labels:
+        # ex : y =  GIFA  + STOREY + GIFA * STOREY ok
+        # but y = GIFA * Storey ko
         xCross = np.zeros((numValues, len(mixVariables))) #80, 2
         colIndex = 0
-        for list in mixVariables: #todo :this works for qtt only! - should remove the qtt/qlt that you only want in mix/powers
+        xCrossLabels = []
+        for list in mixVariables:
             arrays = [np.array([self.x[f] for f in list]).T]
-            # print(type(arrays), len(arrays))
-            # print(type(arrays[0]), len(arrays[0]))
-            # print(arrays[0].shape)
+            xCrossLabels.append('*'.join(list))
             xCross[:, colIndex] = np.prod(np.hstack(arrays), axis=1)
-            # for i in range(numValues):
-            #     print(arrays[0][i], xCross[:, colIndex][i])
-
             colIndex += 1
-        return xCross
+        return xCross, xCrossLabels
 
 
 
