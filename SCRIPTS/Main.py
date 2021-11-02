@@ -3,38 +3,45 @@ from Data import Data
 from Data import *
 from ModelAssessment import rotation
 from Dashboard import *
+import Search
+import Plot
 
-rd = RawData(csvPath, ';', 5, xQualLabels, xQuantLabels, yLabels)
-dat = Data(rd, scaling)
-# print(type(dat.crossVariablesDataframe(mixVariables, 80)), (dat.crossVariablesDataframe(mixVariables, 80).shape))
-
-#print(len(dat.x), dat.x)
-
-#print(dat.asDataframe(mixVariables=mixVariables)[0].shape, dat.asDataframe(mixVariables=mixVariables)[0])
-# print(dat.asDataframe(powers, mixVariables)[0].shape, dat.asDataframe(powers, mixVariables)[0])
-x, y, xlabels = dat.asDataframe(powers, mixVariables)
-print("here", xlabels)
-#xSets, ySetsMultiVar = dat.asDataframes(powers, mixVariables)
+# import Plot
 
 
-def checkyLabels(yLabels, xSets, modelingParams, ySetsMultiVar):
-    for i in range(len(yLabels)):
-        print("------> " + yLabels[i])
-        ySets = [batch[:, i] for batch in ySetsMultiVar]
-        score, theta, scores = rotation(xSets, ySets, modelingParams)
-        print("Mean quality (%s) :" % modelingParams['method'], score)
-        print("Batchs quality (%s) :" % modelingParams['method'], scores)
-        print("First Theta (%s) :" % len(theta[0]))
-        print(len(theta[0]), type(theta[0]), theta[0])
-        # for t in theta:
-        #     print(t)
-        print()
+"""
+------------------------------------------------------------------------------------------------------------------------
+1.DATA
+------------------------------------------------------------------------------------------------------------------------
+"""
+rdat = RawData(csvPath, ';', 5, xQualLabels, xQuantLabels, yLabels)
 
-        print("theta - mean", np.array([np.mean(theta, axis =0)]))
-        print("theta - std ", np.array([np.std(theta, axis=0)]))
+dat = Data(rdat, scalers) #this has to be rebuilt in study power
 
+x, y, variabLabels = dat.asDataframe(powers, mixVariables)
+
+xSets, ySetsMultiVar, xlabels = dat.asDataframes(powers, mixVariables)
+
+# results = Search.scenarioResults(yLabels, xSets, ySetsMultiVar, variabLabels, modelingParams, displayParams)
 
 
-
-
-# checkyLabels(yLabels, xSets, modelingParams, ySetsMultiVar)
+"""
+------------------------------------------------------------------------------------------------------------------------
+1.RUN
+------------------------------------------------------------------------------------------------------------------------
+# """
+# # #
+param = 'regularisation'
+paramList = [0, 0.001, 0.01, 0.1, 1, 5, 20, 100, 1000]
+variable = 'GIFA (m2)'
+powerList = [[1], [1, 2], [1, 2, 3]] #, [1, 2, 3, 4, 5], [1, 0.5], [1, 0.5, (1/3)],[1, 0.5, (1/3), 0.25, 0.2], [1, 0.5, (1/3), 0.25, 0.2]]
+# #
+# paramStudy = Search.studyParam(paramList, yLabels, xSets, ySetsMultiVar, variabLabels, modelingParams, param, displayParams)
+# # #
+# # # x_list, y_list = paramList, paramStudy['accuracy(Calculated Total tCO2e)']
+# # # Plot.plot_sns_graph(x_list, y_list, param, 'accuracy(Calculated Total tCO2e)', title=None, figure_size=(8,12), folder=None, plot=False)
+# #
+# # powerstudy, fullStudy = Display.studyPower('GIFA (m2)', powerList, powers, mixVariables, dat, yLabels, modelingParams, displayParams)
+# # print(powerstudy)
+#
+powerstudy = Search.powerResults(dat, modelingParams, powers, mixVariables, variable, powerList, yLabels, displayParams)

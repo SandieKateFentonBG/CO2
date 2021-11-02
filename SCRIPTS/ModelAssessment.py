@@ -2,7 +2,7 @@ from LinearRegression import LinReg
 import numpy as np
 
 
-def rotation(xSets, ySets, modelingParams):
+def rotation(xSets, ySets, modelingParams): #K-fold cross-validation
     thetas, evals = [], []
     for i in range(len(xSets)):
         xTrain = np.vstack([batch for batch in xSets if batch is not xSets[i]])
