@@ -97,20 +97,35 @@ def paramResults(paramList, yLabels, xSets, ySetsMultiVar, variabLabels, dbModel
 
     paramStudy = {"studied parameter": modelingParamsKey, "parameter values": paramList}
     keys = []
+    base = "<" + '//'.join(variabLabels) + ">"
     for elem in paramList:
         dbModelingParams[modelingParamsKey] = elem
         k = modelingParamsKey + "(%s)  " % elem + "<" + '//'.join(variabLabels) + ">"
+        # paramStudy[modelingParamsKey + "(%s)" % elem] = scenarioResults(yLabels, xSets, ySetsMultiVar, variabLabels, dbModelingParams)#todo : change here
         paramStudy[k] = scenarioResults(yLabels, xSets, ySetsMultiVar, variabLabels, dbModelingParams)#todo : change here
         keys.append(k)
 
     if displayParams:
+        # paramDisplay(paramStudy, yLabels, paramList, dbModelingParams, modelingParamsKey, displayParams)
         studyDisplay(modelingParamsKey, paramList, paramStudy, keys, yLabels, dbModelingParams, displayParams,
                       variableText="studied parameter :", listText="parameter values :")
 
         if displayParams["archive"]:
-            saveStudy(displayParams, paramStudy, keys, yLabels, dbModelingParams)
+            saveStudy(displayParams, paramStudy)
 
     return paramStudy
+
+def paramDisplay(paramStudy, yLabels, paramList, dbModelingParams, modelingParamsKey, displayParams):
+
+    if displayParams['showAll']:
+        for k, v in paramStudy.items():
+            print(k,":", v)
+    if displayParams['showAccuracy']:
+        print("studied parameter :", modelingParamsKey)
+        print("metric:", "Mean quality (%s)" % dbModelingParams['method'])
+        for elem in paramList:
+            for label in yLabels:
+                print(modelingParamsKey,":", elem, "(%s)" % label,  paramStudy[modelingParamsKey + "(%s)" % elem]["Quality(%s)" % label]["Mean quality (%s)" % dbModelingParams['method']])
 
 def powerResults(data, dbModelingParams, dbPowers, dbMixVariables, variable, variabPowerList, yLabels, displayParams = None): #variabLabels,xSets,ySetsMultiVar,
 
@@ -138,9 +153,11 @@ def powerResults(data, dbModelingParams, dbPowers, dbMixVariables, variable, var
         xSets, ySetsMultiVar, variabLabels = scenarioDataframe(data, dbPowers, dbMixVariables)
         k = "<" + '//'.join(variabLabels) + ">"
         variabPowerStudy[k]= scenarioResults(yLabels, xSets, ySetsMultiVar,variabLabels, dbModelingParams)
+        # variabPowerStudy[variable + "_power_" + "(%s)" % p]= scenarioResults(yLabels, xSets, ySetsMultiVar,variabLabels, dbModelingParams)
         keys.append(k)
 
     if displayParams:
+        # powerDisplay(variable, variabPowerList, variabPowerStudy, yLabels, dbModelingParams, displayParams)
         studyDisplay(variable, variabPowerList, variabPowerStudy, keys, yLabels, dbModelingParams, displayParams,
                       variableText="studied variable :", listText="power values :")
 
@@ -148,6 +165,21 @@ def powerResults(data, dbModelingParams, dbPowers, dbMixVariables, variable, var
             saveStudy(displayParams, variabPowerStudy, keys, yLabels, dbModelingParams)
 
     return variabPowerStudy
+
+def powerDisplay(variable, variabPowerList, variabPowerStudy, yLabels, dbModelingParams, displayParams):
+
+    if displayParams['showAll']:
+        for k, v in variabPowerStudy.items():
+            print(k, ":", v)
+    if displayParams['showAccuracy']:
+        print("studied variable :", variable)
+        print("power values :", variabPowerList)
+        print("metric:", "Mean quality (%s)" % dbModelingParams['method'])
+        for p in variabPowerList:
+            for label in yLabels:
+                print(variable + "_power_" + "(%s)" % p,
+                      variabPowerStudy[variable + "_power_" + "(%s)" % p]["Quality(%s)" % label][
+                      "Mean quality (%s)" % dbModelingParams['method']])
 
 def mixResults(data, dbModelingParams, dbPowers, mixedVariables, variabMixList, yLabels,
                displayParams=None):  #todo
@@ -176,6 +208,7 @@ def mixResults(data, dbModelingParams, dbPowers, mixedVariables, variabMixList, 
         keys.append(k)
 
     if displayParams:
+        # mixDisplay(mixedVariables, variabMixList, variabMixStudy, keys, yLabels, dbModelingParams, displayParams)
         studyDisplay(mixedVariables, variabMixList, variabMixStudy, keys, yLabels, dbModelingParams, displayParams,
                       variableText="combined variable :", listText="combinations :")
 
@@ -185,14 +218,19 @@ def mixResults(data, dbModelingParams, dbPowers, mixedVariables, variabMixList, 
 
     return variabMixStudy
 
-# def plotplotplot(Results, label, metric):
-#     #metric = "Mean quality (%s)" % dbModelingParams['method']
-#     xList = [] paramlist/
-#     yList = [Results[k]["Quality(%s)" % label]["Mean quality (%s)" % dbModelingParams['method']] for k in Results.keys()]
-#
-#     for k in Results.keys():
-#         yList.append(Results[k]["Quality(%s)" % label][metric])
-#     pass
+def mixDisplay(mixedVariables, variabMixList, variabMixStudy, keys, yLabels, dbModelingParams, displayParams): #todo
+
+    if displayParams['showAll']:
+        for k, v in variabMixStudy.items():
+            print(k, ":", v)
+    if displayParams['showAccuracy']:
+        print("combined variable :", mixedVariables)
+        print("combinations :", variabMixList)
+        print("metric:", "Mean quality (%s)" % dbModelingParams['method'])
+        for listOfCombinations, key in zip(variabMixList, keys):
+            for label in yLabels:
+
+                print(key, label, ":", variabMixStudy[key]["Quality(%s)" % label]["Mean quality (%s)" % dbModelingParams['method']])
 
 def studyDisplay(variables, variableList, Result, keys, yLabels, dbModelingParams, displayParams, variableText, listText): #todo
 

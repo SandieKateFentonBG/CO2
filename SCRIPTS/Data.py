@@ -66,7 +66,7 @@ class Data:
             else [int(x.shape[0] / batchCount * i) for i in range(1, batchCount)]
         return np.split(x, cutoffIndex), np.split(y, cutoffIndex), xlabels
 
-    def asDataframe(self, powers={}, mixVariables=[]):
+    def asDataframe(self, powers={}, mixVariables=[]): #todo : this should maybe build a df with everything then remove all cilumns thatarent in mix/powers...
         numValues = len(next(iter(self.x.values())))
         x = np.zeros((numValues, len(self.x)-len(powers)))
         y = np.zeros((numValues, len(self.y)))
