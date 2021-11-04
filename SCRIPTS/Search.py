@@ -185,15 +185,6 @@ def mixResults(data, dbModelingParams, dbPowers, mixedVariables, variabMixList, 
 
     return variabMixStudy
 
-# def plotplotplot(Results, label, metric):
-#     #metric = "Mean quality (%s)" % dbModelingParams['method']
-#     xList = [] paramlist/
-#     yList = [Results[k]["Quality(%s)" % label]["Mean quality (%s)" % dbModelingParams['method']] for k in Results.keys()]
-#
-#     for k in Results.keys():
-#         yList.append(Results[k]["Quality(%s)" % label][metric])
-#     pass
-
 def studyDisplay(variables, variableList, Result, keys, yLabels, dbModelingParams, displayParams, variableText, listText): #todo
 
     if displayParams['showAll']:

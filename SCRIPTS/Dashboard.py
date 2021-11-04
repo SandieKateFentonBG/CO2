@@ -4,11 +4,11 @@ csvPath = "C:/Users/sfenton/Code/Repositories/CO2/DATA/210413_PM_CO2_data"
 # outputPath = 'C:/Users/sfenton/Code/Repositories/CO2/RESULTS/'
 
 displayParams = {"csvPath": "C:/Users/sfenton/Code/Repositories/CO2/DATA/210413_PM_CO2_data", "outputPath":'C:/Users/sfenton/Code/Repositories/CO2/RESULTS/',
-                 'showAccuracy': False, 'showThetas': False, 'showAll' : False, 'archive': True, 'reference': 'test'}
+                 'showAccuracy': True, 'showThetas': False, 'showAll' : False, 'showPlot' : False, 'archive': True, 'reference': '211104'}
 
 # DATA
 
-xQualLabels = [] #'Sector','Type','Basement' ,'Foundations','Ground Floor','Superstructure','Cladding', 'BREEAM Rating']
+xQualLabels = ['Sector','Type','Basement' ,'Foundations','Ground Floor','Superstructure','Cladding', 'BREEAM Rating'] #]
 xQuantLabels = ['GIFA (m2)','Storeys','Typical Span (m)', 'Typ Qk (kN_per_m2)'] # ]
 
 allvalues = ['Sector_Other', 'Sector_Residential', 'Sector_Cultural', 'Sector_Educational', 'Sector_Mixed Use', 'Sector_Commercial',
@@ -34,6 +34,6 @@ scalers = {'scaling': False, 'method': 'robustscale','positiveValue': 5, 'qinf':
 
 powers = {}#'GIFA (m2)': [1, 0.5], 'Storeys':[1, 2, 3], 0.5 ,, 1/3, 1/4  1/5, 1/6,'Storeys':[1, 2, 3] ,'Typical Span (m)': [1, 2, 3],'Typ Qk (kN_per_m2)': [1, 2, 3] }
 
-modelingParams = {"regularisation": 1, "tolerance": 0.1, "method": "accuracy"} #'mse'; "mae"
+modelingParams = {"regularisation": 20, "tolerance": 0.1, "method": "accuracy"} #'mse'; "mae"
 
-mixVariables = [['GIFA (m2)','Storeys']] #[], 'Typ Qk (kN_per_m2)'],,['Sector','Type','Basement','Foundations','Ground Floor','Superstructure','Cladding', 'BREEAM Rating' ]], ['Typical Span (m)'],['GIFA (m2)','Storeys','Typical Span (m)', 'Typ Qk (kN_per_m2)'], ['Sector_Residential','Basement_Partial Footprint']
+mixVariables = [] #[['GIFA (m2)','Storeys']], 'Typ Qk (kN_per_m2)'],,['Sector','Type','Basement','Foundations','Ground Floor','Superstructure','Cladding', 'BREEAM Rating' ]], ['Typical Span (m)'],['GIFA (m2)','Storeys','Typical Span (m)', 'Typ Qk (kN_per_m2)'], ['Sector_Residential','Basement_Partial Footprint']

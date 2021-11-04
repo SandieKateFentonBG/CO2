@@ -110,5 +110,29 @@ class Data:
             colIndex += 1
         return xCross, xCrossLabels
 
+    def dataModification(self, powers, mixVariables):
 
+        numValues = len(next(iter(self.x.values())))
+        xUnchanged = np.zeros((numValues, len(self.x)))
+        yUnchanged = np.zeros((numValues, len(self.y)))
+        xlabelsUnchanged = [f for f in self.x.keys()]
+        for i in range(numValues):  # 80
+            xUnchanged[i, :] = np.array([self.x[f][i] for f in self.x.keys()])
+            yUnchanged[i, :] = np.array([self.y[f][i] for f in self.y.keys()])
+
+        print('Unchanged Labels: ', xlabelsUnchanged)
+        print('xUnchanged : ', type(xUnchanged), xUnchanged.shape)
+        print(xUnchanged[0])
+        print('yUnchanged : ', type(yUnchanged), yUnchanged.shape, )
+        print(yUnchanged[0])
+        print('')
+
+        xNew, yNew, xlabelsNew = self.asDataframe(powers, mixVariables)
+
+        print('New Labels: ', xlabelsNew)
+        print('xNew : ', type(xNew), xNew.shape)
+        print(xNew[0])
+        print('yNew : ', type(yNew), yNew.shape)
+        print(yNew[0])
+        print('')
 

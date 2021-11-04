@@ -8,8 +8,21 @@ class LinReg:
 
     def calibration(self, x, y):
         # Calculate the regularized pseudo_inverse of A
-        pinv = np.matmul(np.linalg.inv(np.add(np.matmul(x.T, x), self.regul * np.identity(np.shape(x)[1]))), x.T)
-        # fit the regularized polynomial to find optimal theta matrix
+        # todo : understand why i get a singular matrix when integrating my xQuali for a regularisation/parameter study
+        # todo :> why should i replace np.linalg.inv by np.linalg.pinv - what's the differnece?
+        # todo :  https://stackoverflow.com/questions/10326015/singular-matrix-issue-with-numpy
+
+        try:
+        # your code that will (maybe) throw
+            pinv = np.matmul(np.linalg.inv(np.add(np.matmul(x.T, x), self.regul * np.identity(np.shape(x)[1]))), x.T)
+            #print('used : np.linalg.inv')
+        except np.linalg.LinAlgError as e:
+            if 'Singular matrix' in str(e):
+                # your error handling block
+                pinv = np.matmul(np.linalg.pinv(np.add(np.matmul(x.T, x), self.regul * np.identity(np.shape(x)[1]))), x.T)
+                #print('used : np.linalg.pinv')
+            else:
+                raise
         self.theta = np.matmul(pinv, y)
 
     def prediction(self, x):
