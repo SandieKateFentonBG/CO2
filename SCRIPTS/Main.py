@@ -34,7 +34,7 @@ unit = "Calculated tCO2e_per_m2" #Calculated Total tCO2e
 
 # Parameter study
 # ----------------------------------------------------------------------------------------------------------------------
-
+#
 # param = 'regularisation'
 # paramList = [0, 0.001, 0.01, 0.1, 1, 5, 10, 15, 20, 25, 50, 100, 1000]
 #
@@ -68,18 +68,18 @@ print(variable, runPowerStudy(variable, powerList))
 # Mix study
 # ----------------------------------------------------------------------------------------------------------------------
 
-variabMixList = [[['GIFA (m2)']+[elem]] for elem in xQuantLabels if elem!='GIFA (m2)'] #! has to be of dim [[[]]] #todo: make this work for xQualLabels
-mixedVariables = xQuantLabels + xQualLabels #list(set([label[i] for label in variabMixList[j] for i in range(len(label))])) #todo: change this
-
-def runMixStudy(mixedVariables, variabMixList):
-    mixStudy = Search.mixResults(dat, modelingParams, powers, mixedVariables, variabMixList, yLabels, displayParams)
-    xLabel, yLabel= 'Combined Variables', "%s" % modelingParams['method'] + " (%s)" % unit
-    xList, yList = variabMixList, [mixStudy[k]["Quality(%s)" % unit]["Mean quality (%s)" % modelingParams['method']]for k,v in mixStudy.items() if type(v)==dict]
-    Plot.plotGraph(xList, yList, xLabel, yLabel, displayParams, convertxList=True, folder = xLabel)
-    return xList, yList
-
-
-print('Mix', runMixStudy(mixedVariables, variabMixList))
+# variabMixList = [[['GIFA (m2)']+[elem]] for elem in xQuantLabels if elem!='GIFA (m2)'] #! has to be of dim [[[]]] #todo: make this work for xQualLabels
+# mixedVariables = xQuantLabels + xQualLabels #list(set([label[i] for label in variabMixList[j] for i in range(len(label))])) #todo: change this
+#
+# def runMixStudy(mixedVariables, variabMixList):
+#     mixStudy = Search.mixResults(dat, modelingParams, powers, mixedVariables, variabMixList, yLabels, displayParams)
+#     xLabel, yLabel= 'Combined Variables', "%s" % modelingParams['method'] + " (%s)" % unit
+#     xList, yList = variabMixList, [mixStudy[k]["Quality(%s)" % unit]["Mean quality (%s)" % modelingParams['method']]for k,v in mixStudy.items() if type(v)==dict]
+#     Plot.plotGraph(xList, yList, xLabel, yLabel, displayParams, convertxList=True, folder = xLabel)
+#     return xList, yList
+#
+#
+# print('Mix', runMixStudy(mixedVariables, variabMixList))
 
 # Global study
 # ----------------------------------------------------------------------------------------------------------------------

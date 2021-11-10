@@ -4,7 +4,7 @@ csvPath = "C:/Users/sfenton/Code/Repositories/CO2/DATA/210413_PM_CO2_data"
 # outputPath = 'C:/Users/sfenton/Code/Repositories/CO2/RESULTS/'
 
 displayParams = {"csvPath": "C:/Users/sfenton/Code/Repositories/CO2/DATA/210413_PM_CO2_data", "outputPath":'C:/Users/sfenton/Code/Repositories/CO2/RESULTS/',
-                 'showAccuracy': True, 'showThetas': False, 'showAll' : False, 'showPlot' : False, 'archive': True, 'reference': '211104'}
+                 'showAccuracy': True, 'showThetas': False, 'showAll' : False, 'showPlot' : True, 'archive': False, 'reference': '211104'}
 
 # DATA
 

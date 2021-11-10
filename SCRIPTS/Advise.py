@@ -19,7 +19,7 @@ ADVISE - interact with designer
 """
 def predict():
     """
-    "What would be the best type of... given my scenario.."
+    "What would be .."
 
     IN : all Q values
     OUT : CO2e/ CO2e/m2
@@ -37,7 +37,7 @@ def predict():
 def recommend():
 
     """
-    "What would be the best type of... given my scenario.."
+    "What would be the best type of... given my project.."
 
     IN : all Q values but 1... or more + detail of interest (best/ordered/worse)
 
