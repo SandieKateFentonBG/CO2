@@ -34,6 +34,14 @@ def scale(xQuanti, method, positiveValue, qinf, qsup): #'standardize', 'robustsc
                 array = np.array(column).reshape(-1, 1)
                 rs = RobustScaler(quantile_range=(qinf, qsup)).fit(array)
                 xQuantiScaled[label] = list(rs.transform(array)[0])#todo : not working, flatten output - Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.
+        elif method == 'skl_standardscale':#use sklearn standardscaler
+            from sklearn.preprocessing import StandardScaler
+            for label, column in xQuanti.items():
+                array = np.array(column).reshape(-1, 1)
+                rs = StandardScaler().fit(array)
+                xQuantiScaled[label] = list(rs.transform(array))
+
+
     return xQuantiScaled
 
 
@@ -110,7 +118,7 @@ class Data:
             colIndex += 1
         return xCross, xCrossLabels
 
-    def dataModification(self, powers, mixVariables):
+    def dataModification(self, powers={}, mixVariables=[]):
 
         numValues = len(next(iter(self.x.values())))
         xUnchanged = np.zeros((numValues, len(self.x)))

@@ -15,3 +15,112 @@
   #elevate to logarithm/inverse proportionalty/other relations
   #mix features x1x2 etc
   #the polynomial for CO2e willl not be calibrated in the same way as the one for CO2e/m2..?
+
+
+80 [[4.631e+03 3.000e+00 7.000e+00 ... 0.000e+00 0.000e+00 0.000e+00]
+ [4.640e+03 7.000e+00 4.000e+00 ... 0.000e+00 0.000e+00 0.000e+00]
+ [7.420e+02 3.000e+00 2.500e+00 ... 0.000e+00 0.000e+00 0.000e+00]
+ ...
+ [3.851e+03 1.000e+00 2.050e+01 ... 0.000e+00 0.000e+00 0.000e+00]
+ [3.070e+02 2.000e+00 4.000e+00 ... 0.000e+00 0.000e+00 0.000e+00]
+ [3.400e+02 2.000e+00 6.500e+00 ... 0.000e+00 0.000e+00 0.000e+00]]
+80 [ 4631.  4640.   742.  1534.  7284.  4180. 15145.  4500.  3900.  1724.
+  2772.   904.  1050.  1555.  8118.  1874.  1305.  2349.  7755.  2100.
+ 15985.  3932.  3460. 11500.  9483. 31774.  2276.   220.  1311. 11736.
+  7922.   544.  5620.  1712. 37115. 14029.  1360.  1154.   862.  3499.
+ 10108.  9862.  1290.  5428.   125. 19512.  2395. 10220.  5500.  1729.
+  2054.  1210.  2769.  3600.  2400.   746.   810.   648.   500.  1100.
+  1900.  1900.  3023.   867. 21500.  3997.  3657.  1830.   517.  1643.
+  2368.  2404.  1930.  8748.  1163.  2575.  4787.  3851.   307.   340.]
+
+
+80 [-0.04691337 -0.04552841 -0.64536703 -0.52349115  0.36134006 -0.11631491
+  1.57101974 -0.06707213 -0.15940234 -0.49425325 -0.33298314 -0.62043787
+ -0.59797086 -0.52025959  0.48967906 -0.4711707  -0.55873052 -0.39807594
+  0.43381928 -0.43639298  1.70028204 -0.15447806 -0.22711117  1.01011369
+  0.69973029  4.1299516  -0.40930945 -0.72569432 -0.55780721  1.04643024
+  0.45951785 -0.675836    0.1052776  -0.49609985  4.95184438  1.39928554
+ -0.55026691 -0.58196695 -0.62690099 -0.2211097   0.7959076   0.75805221
+ -0.56103877  0.07573193 -0.74031327  2.24302981 -0.39099729  0.81314257
+  0.08681156 -0.49348383 -0.44347163 -0.57334947 -0.33344479 -0.20556745
+ -0.39022788 -0.6447515  -0.63490294 -0.6598321  -0.68260688 -0.59027667
+ -0.46716972 -0.46716972 -0.29435834 -0.62613157  2.54895058 -0.14447562
+ -0.19679608 -0.47794158 -0.67999086 -0.50671783 -0.39515215 -0.38961234
+ -0.46255321  0.58662578 -0.580582   -0.36329823 -0.02290751 -0.16694264
+ -0.71230644 -0.70722827]
+
+Process finished with exit code 0
+
+
+test 0
+1
+score -0.7455170891313729
+param {'copy_X': True, 'fit_intercept': True, 'n_jobs': None, 'normalize': False}
+intercept [0.16814677]
+2
+score -0.7260819106691645
+param {'copy_X': True, 'fit_intercept': True, 'n_jobs': None, 'normalize': True}
+intercept [0.26710612]
+3
+score -0.6955904363755825
+param {'copy_X': True, 'fit_intercept': False, 'n_jobs': None, 'normalize': True}
+intercept 0.0
+
+
+test 1
+1
+score -0.4414767543797533
+param {'copy_X': True, 'fit_intercept': True, 'n_jobs': None, 'normalize': False}
+intercept [0.26598706]
+2
+score -1.9240070385938064e+26
+param {'copy_X': True, 'fit_intercept': True, 'n_jobs': None, 'normalize': True}
+intercept [-9.07405725e+12]
+3
+score -0.35051815786128926
+param {'copy_X': True, 'fit_intercept': False, 'n_jobs': None, 'normalize': True}
+intercept 0.0
+
+test 2
+1
+score -0.044087658733563684
+param {'copy_X': True, 'fit_intercept': True, 'n_jobs': None, 'normalize': False}
+intercept [0.16946613]
+2
+score -6.872251116139638e+25
+param {'copy_X': True, 'fit_intercept': True, 'n_jobs': None, 'normalize': True}
+intercept [-1.8120124e+12]
+3
+score -0.042127672515833714
+param {'copy_X': True, 'fit_intercept': False, 'n_jobs': None, 'normalize': True}
+intercept 0.0
+
+
+test 3
+1
+score -1.2677431136084043
+param {'copy_X': True, 'fit_intercept': True, 'n_jobs': None, 'normalize': False}
+intercept [0.2245042]
+2
+score -1.2221522287697044
+param {'copy_X': True, 'fit_intercept': True, 'n_jobs': None, 'normalize': True}
+intercept [0.24781388]
+3
+score -1.2973965271037753
+param {'copy_X': True, 'fit_intercept': False, 'n_jobs': None, 'normalize': True}
+intercept 0.0
+
+
+test 4
+1
+score 0.1747619867068697
+param {'copy_X': True, 'fit_intercept': True, 'n_jobs': None, 'normalize': False}
+intercept [0.11830503]
+2
+score -4.85142079867803e+24
+param {'copy_X': True, 'fit_intercept': True, 'n_jobs': None, 'normalize': True}
+intercept [-2.29079595e+11]
+3
+score 0.1603105565539895
+param {'copy_X': True, 'fit_intercept': False, 'n_jobs': None, 'normalize': True}
+intercept 0.0
